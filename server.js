@@ -4,14 +4,30 @@ import mongoose from 'mongoose'
 import userRouter from './Routers/userRouter.js'
 import {createServer} from 'http'
 import  * as io from 'socket.io'
+import jwt from 'express-jwt'
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+
+
+  
+  // enforce on all endpoints
+  app.use( jwt({
+    secret: 'DD06Ti64J81aQjqXinfjVOPrehZFb8dJ',
+    audience: 'https://server-112.herokuapp.com',
+    issuer: 'https://dev-v--pixya.us.auth0.com/',
+    algorithms: ['HS256'] 
+  }));
+
 const port = process.env.PORT || 5000;
 const server = createServer(app)
 server.listen(port, () => console.log(`Server is running at ${port}........`))
 app.get("/",(req,res) => res.send("Hurray! server is running..."))
+app.get('/authorized', function (req, res) {
+    res.send('Secured Resource');
+});
 
 
 // Step - 2: Now connect with MongoDB
