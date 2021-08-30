@@ -5,6 +5,7 @@ import userRouter from './Routers/userRouter.js'
 import {createServer} from 'http'
 import  * as io from 'socket.io'
 import jwt from 'express-jwt'
+import jwks from 'jwks-rsa'
 
 const app = express();
 app.use(express.json());
@@ -15,10 +16,15 @@ app.use(cors());
   
   // enforce on all endpoints
   app.use( jwt({
-    secret: 'DD06Ti64J81aQjqXinfjVOPrehZFb8dJ',
-    audience: 'https://server-112.herokuapp.com',
-    issuer: 'https://dev-v--pixya.us.auth0.com/',
-    algorithms: ['HS256'] 
+    secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: 'https://dev-v--pixya.us.auth0.com/.well-known/jwks.json'
+  }),
+  audience: 'https://server-112.herokuapp.com',
+  issuer: 'https://dev-v--pixya.us.auth0.com/',
+  algorithms: ['RS256']
   }));
 
 const port = process.env.PORT || 5000;
