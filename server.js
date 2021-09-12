@@ -15,7 +15,7 @@ app.use(cors());
 
   
   // enforce on all endpoints
-  app.use( jwt({
+ /* app.use( jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
@@ -25,7 +25,7 @@ app.use(cors());
   audience: 'https://server-112.herokuapp.com',
   issuer: 'https://dev-v--pixya.us.auth0.com/',
   algorithms: ['RS256']
-  }));
+  }));*/
 
 const port = process.env.PORT || 5000;
 const server = createServer(app)

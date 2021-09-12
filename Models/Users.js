@@ -9,17 +9,25 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    dateAdded: {
+    email: {
         type: String,
         required: true
     },
-    desc: {
-        type: String,
-        required: true,
-    },
     phone: {
         type: Number,
-        required: false
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    credatedDate: {
+        type: String,
+        required: true
     }
 })
 
