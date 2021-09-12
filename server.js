@@ -26,6 +26,7 @@ app.use(cors());
   issuer: 'https://dev-v--pixya.us.auth0.com/',
   algorithms: ['RS256']
   }));*/
+  
 
 const port = process.env.PORT || 5000;
 const server = createServer(app)
