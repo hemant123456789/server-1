@@ -47,6 +47,30 @@ userRouter.post(
     }
 )
 
+userRouter.post(
+    '/validate',
+    async(req,res) => {
+        const keyName = req.body.keyName;
+        const value = req.body.email;
+        User.find({email: value}, (error,result)=>{
+            var response={}
+            response.header=req.headers;
+            if(error){
+                response.status=500;
+                response.data = error;
+            }
+            else{
+                response.status=200;
+                response.data = result.length > 0 ? true : false;
+            }
+            res.send(response);
+        })
+
+    }
+)
+
+
+
 
 userRouter.put(
     '/update',
